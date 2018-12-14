@@ -1,0 +1,24 @@
+<h1>Nos 3 meilleurs ventes</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for article in articles %}
+        <tr>
+
+            <td>{{ article.label }}</td>
+            <td>{{ article.price }}</td>
+            <td>
+                <a class="btn  btn-success"
+                   href="{{ path('mi11_vitrine_cart_add', {'id':   article.id, 'route':  app.request.get('_route')}) }}">Ajouter
+                    au panier</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    Liste des Produits de la catégorie : {{ category.label }}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Quantité disponible</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in category.articles %}
+            <tr>
+                <td>{{ article.label }}</td>
+                <td>{{ article.price|number_format(2, '.') ~ '€' }}</td>
+                <td>{{ article.stock }}</td>
+                <td>
+                    <a class="btn  btn-success" href="{{ path('mi11_vitrine_cart_add', {'id':   article.id, 'route':  app.request.get('_route')}) }}">+</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

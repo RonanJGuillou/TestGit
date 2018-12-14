@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>Client</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ client.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ client.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ client.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

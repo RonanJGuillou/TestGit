@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>Mon panier</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix unitaire</th>
+            <th>Quantité</th>
+            <th>Prix total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for details in cart.details %}
+            <tr>
+                <td>{{ details.article.label }}</td>
+
+                <td>{{ details.article.price|number_format(2, '.') ~ '€' }}</td>
+                <td>{{ details.quantity }}</td>
+            </tr>
+        {% endfor %}
+        {% if cart.details is empty %}
+            <tr>
+                <td colspan="5">Panier vide</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td colspan="5">Total : {{ cart.total|number_format(2, '.') ~ '€' }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

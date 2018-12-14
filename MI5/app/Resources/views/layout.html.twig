@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Muse-E-Commerce{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('bundles/mi11vitrine/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/mi11vitrine/css/custom.css') }}">
+</head>
+<body>
+{{ render(controller('mi11VitrineBundle:Utils:navbar')) }}
+
+<div class="container">
+    {% for type, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+            <div class="alert alert-{{ type }} alert-dismissible fade show position-absolute" role="alert">
+                {{ flash }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {% block body %}
+    {% endblock %}
+</div>
+{% block footer %}
+{% endblock %}
+<script src="{{ asset('bundles/mi11vitrine/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('bundles/mi11vitrine/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/mi11vitrine/js/custom.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<?php
+
+namespace mi05\VitrineBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Command
+ *
+ * @ORM\Table(name="command")
+ * @ORM\Entity(repositoryClass="mi05\VitrineBundle\Repository\CommandRepository")
+ */
+class Command
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isValidated", type="boolean")
+     */
+    private $isValidated;
+
+    /**
+     * One Command has Many Products.
+     * @ORM\OneToMany(targetEntity="mi05\VitrineBundle\Entity\CommandDetails", mappedBy="command")
+     */
+    private $details;
+
+    /**
+     * Many Commands have One Client.
+     * @ORM\ManyToOne(targetEntity="mi05\VitrineBundle\Entity\Client", inversedBy="commands")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->details = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Command
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set isValidated
+     *
+     * @param boolean $isValidated
+     *
+     * @return Command
+     */
+    public function setIsValidated($isValidated)
+    {
+        $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    /**
+     * Get isValidated
+     *
+     * @return bool
+     */
+    public function getIsValidated()
+    {
+        return $this->isValidated;
+    }
+
+    /**
+     * Add detail
+     *
+     * @param \mi05\VitrineBundle\Entity\CommandDetails $detail
+     *
+     * @return Command
+     */
+    public function addDetail(\mi05\VitrineBundle\Entity\CommandDetails $detail)
+    {
+        $this->details[] = $detail;
+
+        return $this;
+    }
+
+    /**
+     * Remove detail
+     *
+     * @param \mi05\VitrineBundle\Entity\CommandDetails $detail
+     */
+    public function removeDetail(\mi05\VitrineBundle\Entity\CommandDetails $detail)
+    {
+        $this->details->removeElement($detail);
+    }
+
+    /**
+     * Get details
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDetails()
+    {
+        return $this->details;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \mi05\VitrineBundle\Entity\Client $client
+     *
+     * @return Command
+     */
+    public function setClient(\mi05\VitrineBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \mi05\VitrineBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+}

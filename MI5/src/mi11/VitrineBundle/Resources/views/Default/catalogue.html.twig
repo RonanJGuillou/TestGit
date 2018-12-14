@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    Liste des Catégories
+    <ul>
+        {% for category in categories %}
+            <li><a href="{{ path('mi11_vitrine_default_categorydetails', {'id': category.id }) }}"> {{ category.label }}</li></a>
+        {% endfor %}
+    </ul>
+{% endblock %}

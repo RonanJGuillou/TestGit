@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>Mes commandes</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Prix total</th>
+            <th>Statut</th>
+            <th>Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for command in commands %}
+            <tr>
+                <td>{{ command.id }}</td>
+                <td>{{ command.total }}</td>
+                <td>
+                    {% if command.isValidated %}
+                        Payée
+                    {% else %}
+                        A payer
+                        {% endif %}
+                </td>
+                <td>
+                    {% if not command.isValidated %}
+                        <a href="{{ path('mi11_vitrine_cart_paycommand', {'id': command.id}) }}" class="btn btn-success">Payer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        {% if commands is empty %}
+            <tr>
+                <td colspan="4">Aucune commande</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

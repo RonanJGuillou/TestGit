@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'message.dear'|trans }} {{ name }}</h2>
+    <p>
+        {{ 'message.welcomeOnSite'|trans }}
+    </p>
+
+    {{ render(controller('mi11VitrineBundle:Utils:bestSeller')) }}
+{% endblock %}
